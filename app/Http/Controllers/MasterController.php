@@ -70,6 +70,7 @@ class MasterController extends Controller
         $data->penerbit = $request->penerbit;
         $data->tahun = $request->tahun;
         $data->donatur = $request->donatur;
+        $data->stok = $request->stok;
         $data->save();
         return redirect('/buku')->with(['success' => "Buku berhasil diedit"]);
     }
@@ -134,6 +135,10 @@ class MasterController extends Controller
             'status'=>0,
         ]);
 
+        $data = Buku::where('id',$request->buku_id)->first();
+        $data->stok = (int)$data->stok - 1;
+        $data->save();
+
         return redirect('/beranda')->with(['success' => "Peminjaman berhasil ditambah"]);
     }
 
@@ -141,6 +146,10 @@ class MasterController extends Controller
         $data = Transaksi::find($id);
         $data->status = 1;
         $data->save();
+
+        $data2 = Buku::where('id',$data->buku_id)->first();
+        $data2->stok = (int)$data2->stok + 1;
+        $data2->save();
 
         return redirect('/beranda')->with(['success' => "Peminjaman berhasil dikembalikan"]);
     }

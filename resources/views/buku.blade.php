@@ -174,6 +174,10 @@
                                 <label for="exampleInputPassword1">Donatur</label>
                                 <input type="text" name="donatur" class="form-control" id="exampleInputPassword4">
                             </div>
+                            <div class="form-group">
+                                <label for="exampleInputPassword1">Stok</label>
+                                <input type="number" name="stok" class="form-control" id="exampleInputPassword5" required>
+                            </div>
                             <button id="submitform2" type="submit" hidden></button>
                         </div>
                     </form>
@@ -217,9 +221,14 @@
                     $('#exampleInputPassword2').val(response['penerbit']);
                     $('#exampleInputPassword3').val(response['tahun']);
                     $('#exampleInputPassword4').val(response['donatur']);
+                    $('#exampleInputPassword5').val(response['stok']);
                     $("#modal-default2").modal('show');
                 }
             });
+        }
+
+        function tambahstok(id) {
+            $('')
         }
     </script>
 @endpush
